@@ -1,0 +1,28 @@
+{
+  "name": "vpd.berabou.me",
+  "private": true,
+
+  "main": "server.coffee",
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "difficult-http-server": "0.0.3",
+    "express": "^4.13.3",
+    "vpvp-vpd": "0.0.0-alpha"
+  },
+
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "coffee server.coffee"
+  },
+  
+  "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/59naga/vpd.berabou.me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/59naga/vpd.berabou.me/issues"
+  },
+  "homepage": "https://github.com/59naga/vpd.berabou.me#readme"
+}
