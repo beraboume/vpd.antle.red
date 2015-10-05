@@ -19,13 +19,13 @@ __ファイル名に日本語を使用しないで下さい。__
 
 [あにまさ式ミクversion1（画像はv2.3のもの）](https://github.com/59naga/j3)
 
-![](http://lohas.nicoseiga.jp/priv/b22f468a60a47b5e7582ace8c70e92e6b06f1f5d/1444008506/1475988)
+![](http://lohas.nicoseiga.jp/priv/c1c18232861f26f51f62fb5ea47e427bfe88aabb/1444010433/1475988)
 
 ## `ginjishi_miku/index.pmx`
 
 [銀獅式初音ミク](http://seiga.nicovideo.jp/seiga/im3891427)
 
-![](http://lohas.nicoseiga.jp/priv/65bbd1b59370abe5b0ea6f4ac3b9c297fc96d781/1444007938/3891427)
+![](http://lohas.nicoseiga.jp/priv/4318e786841c7f5c1687969a414f776aed5ab9e7/1444010454/3891427)
 
 ```
 MMD用モデルデータ：銀獅式初音ミク_ver1.53
