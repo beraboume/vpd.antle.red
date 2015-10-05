@@ -2,13 +2,16 @@
 Promise= require 'bluebird'
 vpd= require 'vpvp-vpd'
 
+# Environment
+process.env.APP= 'nicolive.io'
+
 # Setup app
 angular.element document
 .ready ->
-  angular.bootstrap document,[appName]
+  angular.bootstrap document,[process.env.APP]
 
-appName= 'Viewer'
-app= angular.module appName,[
+app= angular.module process.env.APP,[
+  'ui.router'
   'ngFileUpload'
 ]
 
@@ -21,6 +24,13 @@ app.factory 'stats',($window)->
   $window.document.body.appendChild stats.domElement
 
   stats
+
+app.config ($urlRouterProvider)->
+  $urlRouterProvider.when '','/'
+app.config ($stateProvider)->
+  $stateProvider.state 'viewer',
+    url: '/'
+    controller: 'viewer'
 
 # Private
 scene= new THREE.Scene
@@ -82,8 +92,15 @@ app.controller 'viewer',($scope,$window,stats,Loaders)->
 
   $scope.models= [
     'bower_components/j3/example/miku/index.pmx'
+    'models/ginjishi_miku/index.pmx'
+    'models/lat_miku/index.pmx'
+    'models/lat_miku/summer.pmx'
+    'models/lat_miku/white.pmx'
+    'models/lat_miku/winter.pmx'
+    'models/tda_miku_apend/index.pmx'
+    'models/grpk_miku/index.pmx'
   ]
-  $scope.pmxName= $scope.models[$scope.models.length-1]
+  $scope.pmxName= $scope.models[~~($scope.models.length*Math.random())]
 
   $scope.motions= [
     'poses/dio.vpd'

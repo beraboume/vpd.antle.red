@@ -16,13 +16,13 @@ html(lang='ja')
     footer
       a(href="https://github.com/59naga/vpd.berabou.me") fork on me githubｯｯｯ!!
 
-    main(ng-controller="viewer" ng-model="files" ngf-drop)
+    main(ui-view ng-model="files" ngf-drop)
       form#debug
         section
           h2 loop
           input(ng-model="endless" type="checkbox")
-          //- h2 models
-          //- select(ng-model='pmxName' ng-options="model for model in models")
+          h2 models
+          select(ng-model='pmxName' ng-options="model for model in models")
           h2 poses / motions
           select(ng-model='vmdName' ng-options="motion.name || motion for motion in motions")
             
