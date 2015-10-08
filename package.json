@@ -5,7 +5,7 @@
   "main": "server.coffee",
   "dependencies": {
     "bluebird": "^2.10.2",
-    "difficult-http-server": "-0.0.7",
+    "difficult-http-server": "^0.0.7",
     "express": "^4.13.3",
     "vpvp-vpd": "0.0.0-alpha"
   },
