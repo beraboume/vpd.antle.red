@@ -24,6 +24,7 @@ NODE_ENV=production npm start
 ```
 
 とすることで、本番環境に近い、コンパイルを圧縮して、各`index`ファイルを公開します。
+（初回起動時、ファイルの圧縮にCPUをかなり消費します。プロセスが強制終了して`pkgs.min.js`が生成されない場合は、`onefile -o pkgs.min.js -m`を手動で行う必要があるかもしれません。ファイルが`./pkgs.min.js`に存在する場合、圧縮処理は起動しません。）
 
 License
 ---
