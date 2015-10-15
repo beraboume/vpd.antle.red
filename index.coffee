@@ -1,30 +1,41 @@
-# Dependencies
-Promise= require 'bluebird'
-vpd= require 'vpvp-vpd'
-
 # Environment
-process.env.APP= 'nicolive.io'
+process.env.APP= 'vpd.berabou.me'
 
-# Setup app
-angular.element document
-.ready ->
-  angular.bootstrap document,[process.env.APP]
-
-app= angular.module process.env.APP,[
-  'ui.router'
-  'ngFileUpload'
+modelDefault= 'models/mamama_miku/index.pmx'
+models= [
+  'bower_components/j3/example/miku/index.pmx'
+  'models/ginjishi_miku/index.pmx'
+  'models/lat_miku/index.pmx'
+  'models/lat_miku/summer.pmx'
+  'models/lat_miku/white.pmx'
+  'models/lat_miku/winter.pmx'
+  'models/tda_miku_apend/index.pmx'
+  'models/mamama_miku/index.pmx'
+  'models/grpk_miku/index.pmx'
 ]
 
-app.factory 'stats',($window)->
-  stats= new Stats # via stats.js
-  stats.domElement.style.position= 'absolute'
-  stats.domElement.style.left= '0px'
-  stats.domElement.style.top= '0px'
+motionDefault= 'poses/kakyoin.vpd'
+motions= [
+  'poses/dio.vpd'
+  'poses/jojo-2a.vpd'
+  'poses/jojo-2b.vpd'
+  'poses/jojo-3.vpd'
+  'poses/jotaro.vpd'
+  'poses/jyoruno.vpd'
+  'poses/jyosuke.vpd'
+  'poses/kakyoin.vpd'
+  'poses/killer-queen.vpd'
+  'poses/narciso-stand.vpd'
+  'poses/narciso.vpd'
+]
 
-  $window.document.body.appendChild stats.domElement
+# Boot after DOMContentLoaded
+app= require './app'
+angular.element document
+.ready ->
+  angular.bootstrap document,[app.name]
 
-  stats
-
+# Routes
 app.config ($urlRouterProvider)->
   $urlRouterProvider.when '','/'
 app.config ($stateProvider)->
@@ -32,19 +43,11 @@ app.config ($stateProvider)->
     url: '/'
     controller: 'viewer'
 
-# Private
-scene= new THREE.Scene
-window.scene= scene
-
-renderer=
-  if window.WebGLRenderingContext
-    new THREE.WebGLRenderer {antialias:yes}
-  else
-    new THREE.CanvasRenderer {antialias:yes}
-
 # Main
-app.controller 'viewer',($scope,$window,stats,Loaders)->
+app.controller 'viewer',($scope,$window,stats,renderer,Loaders)->
   $scope.endless= no
+
+  scene= new THREE.Scene
 
   dLight= new THREE.DirectionalLight 0xffffff,0.9
   dLight.position.set 0, 7, 10
@@ -90,32 +93,11 @@ app.controller 'viewer',($scope,$window,stats,Loaders)->
 
   $window.addEventListener 'resize',-> resize()
 
-  $scope.models= [
-    'bower_components/j3/example/miku/index.pmx'
-    'models/ginjishi_miku/index.pmx'
-    'models/lat_miku/index.pmx'
-    'models/lat_miku/summer.pmx'
-    'models/lat_miku/white.pmx'
-    'models/lat_miku/winter.pmx'
-    'models/tda_miku_apend/index.pmx'
-    'models/grpk_miku/index.pmx'
-  ]
-  $scope.pmxName= $scope.models[~~($scope.models.length*Math.random())]
+  $scope.models= models
+  $scope.pmxName= modelDefault
 
-  $scope.motions= [
-    'poses/dio.vpd'
-    'poses/jojo-2a.vpd'
-    'poses/jojo-2b.vpd'
-    'poses/jojo-3.vpd'
-    'poses/jotaro.vpd'
-    'poses/jyoruno.vpd'
-    'poses/jyosuke.vpd'
-    'poses/kakyoin.vpd'
-    'poses/killer-queen.vpd'
-    'poses/narciso-stand.vpd'
-    'poses/narciso.vpd'
-  ]
-  $scope.vmdName= 'poses/kakyoin.vpd'#$scope.motions[~~($scope.motions.length*Math.random())]
+  $scope.motions= motions
+  $scope.vmdName= motionDefault
 
   delta= 0
   loader= null
@@ -204,141 +186,3 @@ app.controller 'viewer',($scope,$window,stats,Loaders)->
         renderer.render scene,camera
 
         stats.end()
-
-app.factory 'Loaders',($window)->
-  class Loader
-    constructor: (pmxName,vmdName)->
-      @clock= new THREE.Clock
-
-      @pmx= @loadPmx pmxName
-      @vmd= @loadVmd vmdName
-      @model= @createModel()
-
-    isFulfilled: ->
-      @pmx.isFulfilled() and @vmd.isFulfilled()
-
-    nextDelta: ->
-      @delta= @clock.getDelta()
-
-    loadPmx: (pmxName,params={})->
-      new Promise (resolve)->
-        pmx= new THREE.MMD.PMX
-        pmx.load pmxName,(pmx)->
-          pmx.createMesh params,(mesh)->
-            resolve {pmx,mesh}
-
-    loadVmd: (vmdName)->
-      new Promise (resolve)->
-        vmd= new THREE.MMD.VMD
-        vmd.load vmdName,resolve
-
-    loadVpd: (vpdName)->
-      new Promise (resolve)->
-        xhr= new XMLHttpRequest
-        xhr.open 'GET',vpdName,yes
-        xhr.responseType= 'arraybuffer'
-        xhr.send()
-        xhr.onload= ->
-          resolve vpd.parse new Buffer xhr.response
-
-    generateSkinAnimation: (pmx,vpd)->
-      duration= 0.03333333333333333
-      targets= []
-
-      for pBone in pmx.bones
-        keys= []
-
-        for vBone in vpd.bones
-          continue unless pBone.name is vBone.name
-
-          pos= vBone.position.slice()
-          rot= vBone.quaternion.slice()
-          rot[0]*= -1
-          rot[1]*= -1
-          interp= new Uint8Array [20,20,0,0,20,20,20,20,107,107,107,107,107,107,107,107]
-
-          keys.push
-            name: vBone.name
-            time: 0
-            pos: pos
-            rot: rot
-            interp: interp
-
-          keys.push
-            name: vBone.name
-            time: duration
-            pos: pos
-            rot: rot
-            interp: interp
-
-        targets.push {keys}
-
-      {duration,targets}
-
-    createModel: ->
-      Promise.all [@pmx,@vmd]
-      .spread ({pmx,mesh},vmd)=>
-        mAnimation= vmd.generateMorphAnimation pmx
-        morph= new THREE.MMD.MMDMorph mesh, mAnimation if mAnimation
-
-        sAnimation= vmd.generateSkinAnimation pmx
-        skin= new THREE.MMD.MMDSkin mesh, sAnimation if sAnimation
-
-        if mesh.geometry.MMDIKs.length
-          ik= new THREE.MMD.MMDIK mesh
-
-        if mesh.geometry.MMDIKs.length and window.Ammo
-          physi= new THREE.MMD.MMDPhysi mesh
-          physiPlugin=
-            render: =>
-              physi.preSimulate @delta
-              THREE.MMD.btWorld.stepSimulation @delta
-              physi.postSimulate @delta
-
-          renderer.renderPluginsPre.length= 0
-          renderer.renderPluginsPre.unshift physiPlugin
-
-        hasAd= pmx.bones.some (bone)-> bone.additionalTransform
-        addTrans= new THREE.MMD.MMDAddTrans pmx, mesh if hasAd
-
-        {mesh,morph,skin,ik,physi,physiPlugin,addTrans}
-
-  class VpdLoader extends Loader
-    constructor: (pmxName,vpdName)->
-      @clock= new THREE.Clock
-
-      @pmx= @loadPmx pmxName
-      @vpd= @loadVpd vpdName
-      @model= @createModel()
-
-    isFulfilled: ->
-      @pmx.isFulfilled() and @vpd.isFulfilled()
-
-    createModel: ->
-      Promise.all [@pmx,@vpd]
-      .spread ({pmx,mesh},vpd)=>
-        morph= null
-
-        sAnimation= @generateSkinAnimation pmx,vpd
-        skin= new THREE.MMD.MMDSkin mesh, sAnimation if sAnimation
-
-        if mesh.geometry.MMDIKs.length
-          ik= new THREE.MMD.MMDIK mesh
-
-        if mesh.geometry.MMDIKs.length and window.Ammo
-          physi= new THREE.MMD.MMDPhysi mesh
-          physiPlugin=
-            render: =>
-              physi.preSimulate @delta
-              THREE.MMD.btWorld.stepSimulation @delta
-              physi.postSimulate @delta
-
-          renderer.renderPluginsPre.length= 0
-          renderer.renderPluginsPre.unshift physiPlugin
-
-        hasAd= pmx.bones.some (bone)-> bone.additionalTransform
-        addTrans= new THREE.MMD.MMDAddTrans pmx, mesh if hasAd
-
-        {mesh,morph,skin,ik,physi,physiPlugin,addTrans}
-
-  {Loader,VpdLoader}

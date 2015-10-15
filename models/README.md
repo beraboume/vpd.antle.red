@@ -25,7 +25,7 @@ __ファイル名に日本語を使用しないで下さい。__
 
 [銀獅式初音ミク](http://seiga.nicovideo.jp/seiga/im3891427)
 
-![](http://lohas.nicoseiga.jp/priv/4318e786841c7f5c1687969a414f776aed5ab9e7/1444010454/3891427)
+![](http://lohas.nicoseiga.jp//thumb/3891427l?)
 
 ```
 MMD用モデルデータ：銀獅式初音ミク_ver1.53
@@ -60,7 +60,7 @@ Place this model at the bottom in Draw Order box.
 
 [Lat式ミク](http://seiga.nicovideo.jp/seiga/im3688289)
 
-![](http://lohas.nicoseiga.jp/priv/61c6f00e4ab6ed244735e7af186ab6fc61542da7/1444009115/3688289)
+![](http://lohas.nicoseiga.jp//thumb/3688289l?)
 
 ```
 ：：：：Lat式ミクVer.2.31：：：：
@@ -97,7 +97,7 @@ http://innoce.nobody.jp/
 
 [Tda式初音ミク・アペンド](http://lohas.nicoseiga.jp/o/ceba9957511ccf00a71e53ece2537c67e002baa7/1444008814/2018614)
 
-![](http://lohas.nicoseiga.jp/priv/c87e71a57569dd71283a3b8dab202bfd7232e66c/1444008940/2018614)
+![](http://lohas.nicoseiga.jp//thumb/2018614l?)
 
 ```
 ◆◇---　Tda式初音ミク・アペンド　Ver1.00　---◇◆
@@ -111,11 +111,33 @@ PMXですので対応したバージョンをお使いください。（ver7.39.
 Tda【http://u16hp.blog134.fc2.com/】
 ```
 
+## `mamama_miku/index.pmx`
+
+[ままま式あぴミク](http://piapro.jp/t/KPU3)
+
+![](http://c1.piapro.jp/mimg/dtuhicgnptro9jc3_20121229020229_0740_0500.png)
+
+```
+■Appearance Miku ver 1.00　（2012/12/29公開）
+
+モデリング・セットアップ：ままま
+物理演算・セットアップ：アラン・スミシー
+
+(C)ANGEL Project
+(C)Crypton Future Media, Inc. www.piapro.net
+
+このデータはMikuMikuDance用のモデルデータです。
+利用規約を全て確認、同意した上で本MMDモデルデータをご利用下さい。
+
+本データはクリプトン・フューチャー・メディア株式会社の
+ピアプロ・キャラクター・ライセンス（http://piapro.jp/license/character_guideline）に基づき利用してください。
+```
+
 ## `grpk_miku/index.pmx`
 
 [ゴロペコ式ミク](http://seiga.nicovideo.jp/seiga/im3860553)
 
-![](http://lohas.nicoseiga.jp/priv/854a1c1474b55d0b89b85fa481ac656214adf971/1444008644/3860553)
+![](http://lohas.nicoseiga.jp//thumb/3860553l?)
 
 ```
 【　MikuMikuDance（MikuMikuMoving）用モデルデータ　 ゴロペコ式初音ミク　】

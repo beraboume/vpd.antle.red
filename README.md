@@ -1,7 +1,7 @@
 [vpd.berabou.me](http://vpd.berabou.me/)
 ---
 
-![2015-10-04 13.53.15](https://cloud.githubusercontent.com/assets/1548478/10266467/685b3d5e-6a9f-11e5-815f-6be7bd3c5abd.png)
+![2015-10-16 02.18.43](https://cloud.githubusercontent.com/assets/1548478/10521810/aad3d9aa-73ac-11e5-83dc-3b5efe921949.png)
 
 # Setup & Boot
 
