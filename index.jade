@@ -24,6 +24,8 @@ html(lang='ja')
             input(ng-model="endless" type="checkbox")
             h2 physics
             input(ng-model="physics" type="checkbox")
+
+            button(ng-click="reset()") reset
           h2 models
           select(ng-model='pmxName' ng-options="model for model in models")
           h2 poses / motions
