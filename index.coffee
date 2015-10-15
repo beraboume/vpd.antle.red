@@ -29,6 +29,18 @@ motions= [
   'poses/narciso.vpd'
 ]
 
+available= [
+  'zoom'
+  'yaw'
+  'pitch'
+  'scroll'
+  'slide'
+  'pmxName'
+  'vmdName'
+  'loop'
+  'physics'
+]
+
 # Boot after DOMContentLoaded
 app= require './app'
 angular.element document
@@ -44,9 +56,7 @@ app.config ($stateProvider)->
     controller: 'viewer'
 
 # Main
-app.controller 'viewer',($scope,$window,stats,renderer,Loaders)->
-  $scope.endless= no
-
+app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loaders)->
   scene= new THREE.Scene
 
   dLight= new THREE.DirectionalLight 0xffffff,0.9
@@ -64,26 +74,44 @@ app.controller 'viewer',($scope,$window,stats,renderer,Loaders)->
   controls= new THREE.OrbitControls camera,document.createElement('noop'),renderer.domElement
   controls.center.setY 10
 
+  # controlls
+  query= do $location.search
+  $scope.$watch ->
+    autoSave= $timeout ->
+      values= {}
+      values[key]= $scope[key] for key in available
+
+      $location.search values
+    ,100
+    return
+
+  $scope.loop= query.loop ? no
+  $scope.physics= query.physics ? yes
+  $scope.models= models
+  $scope.pmxName= query.pmxName ? modelDefault
+  $scope.motions= motions
+  $scope.vmdName= query.vmdName ? motionDefault
+
   $scope.$watch 'zoom',(newZoom,oldZoom)->
     scale= newZoom/(oldZoom ? 1)
     controls.dollyIn scale unless isNaN scale 
-    $scope.zoom?= 1.7
+    $scope.zoom?= query.zoom ? 1.7
 
   $scope.$watch 'yaw',(newLeft,oldLeft)->
     controls.rotateLeft (~~oldLeft - ~~newLeft)/58
-    $scope.yaw?= -40
+    $scope.yaw?= query.yaw ? -40
 
   $scope.$watch 'pitch',(newUp,oldUp)->
     controls.rotateUp (~~oldUp - ~~(newUp))/100
-    $scope.pitch?= -60
+    $scope.pitch?= query.pitch ? -60
 
   $scope.$watch 'scroll',(newScroll,oldScroll)->
     controls.panUp -(~~oldScroll - ~~newScroll)
-    $scope.scroll?= 2
+    $scope.scroll?= query.scroll ? 2
 
   $scope.$watch 'slide',(newSlide,oldSlide)->
     controls.panLeft -(~~oldSlide - ~~newSlide)
-    $scope.slide?= 0
+    $scope.slide?= query.slide ? 0
 
   resize= ->
     renderer.setSize innerWidth,innerHeight
@@ -93,16 +121,10 @@ app.controller 'viewer',($scope,$window,stats,renderer,Loaders)->
 
   $window.addEventListener 'resize',-> resize()
 
-  $scope.models= models
-  $scope.pmxName= modelDefault
-
-  $scope.motions= motions
-  $scope.vmdName= motionDefault
-
   delta= 0
   loader= null
 
-  $scope.$watch 'endless',->
+  $scope.$watch 'loop',->
     return unless loader?
 
     loader.model
@@ -111,9 +133,10 @@ app.controller 'viewer',($scope,$window,stats,renderer,Loaders)->
       skin.reset()
       physi.reset()
 
-      morph?.play $scope.endless
-      skin.play $scope.endless
+      morph?.play $scope.loop
+      skin.play $scope.loop
 
+  $scope.$watch 'physics',-> reload()
   $scope.$watch 'pmxName',-> reload()
   $scope.$watch 'vmdName',-> reload()
   $scope.$watch 'files',(file)->
@@ -157,11 +180,14 @@ app.controller 'viewer',($scope,$window,stats,renderer,Loaders)->
       $window.URL.revokeObjectURL motion if motion.slice(0,5) is 'blob:'
 
       resize()
-      morph?.play $scope.endless
-      skin?.play $scope.endless
+      morph?.play $scope.loop
+      skin?.play $scope.loop
 
       requestAnimationFrame ->
         scene.add mesh
+        renderer.renderPluginsPre.length= 0
+        renderer.renderPluginsPre.unshift physiPlugin if $scope.physics && $scope.physics isnt 'false'
+
         render()
 
       render= ->

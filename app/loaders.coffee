@@ -93,9 +93,6 @@ app.factory 'Loaders',($window,Promise,renderer)->
               THREE.MMD.btWorld.stepSimulation @delta
               physi.postSimulate @delta
 
-          renderer.renderPluginsPre.length= 0
-          renderer.renderPluginsPre.unshift physiPlugin
-
         hasAd= pmx.bones.some (bone)-> bone.additionalTransform
         addTrans= new THREE.MMD.MMDAddTrans pmx, mesh if hasAd
 
@@ -130,9 +127,6 @@ app.factory 'Loaders',($window,Promise,renderer)->
               physi.preSimulate @delta
               THREE.MMD.btWorld.stepSimulation @delta
               physi.postSimulate @delta
-
-          renderer.renderPluginsPre.length= 0
-          renderer.renderPluginsPre.unshift physiPlugin
 
         hasAd= pmx.bones.some (bone)-> bone.additionalTransform
         addTrans= new THREE.MMD.MMDAddTrans pmx, mesh if hasAd

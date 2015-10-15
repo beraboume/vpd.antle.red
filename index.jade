@@ -19,8 +19,11 @@ html(lang='ja')
     main(ui-view ng-model="files" ngf-drop)
       form#debug
         section
-          h2 loop
-          input(ng-model="endless" type="checkbox")
+          div.divide
+            h2 loop
+            input(ng-model="endless" type="checkbox")
+            h2 physics
+            input(ng-model="physics" type="checkbox")
           h2 models
           select(ng-model='pmxName' ng-options="model for model in models")
           h2 poses / motions
