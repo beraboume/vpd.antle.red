@@ -149,7 +149,7 @@ app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loader
     $scope.motions.push file
     $scope.vmdName= file
 
-  reload= (useVpd=no)->
+  reload= ->
     return if loader? and not loader.model.isFulfilled()
 
     flush=
@@ -163,56 +163,66 @@ app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loader
       else
         Promise.resolve()
 
-    motion=
-      if $scope.vmdName instanceof File
-        $window.URL.createObjectURL $scope.vmdName
-
-      else
-        $scope.vmdName
+    url= $scope.vmdName
+    url= $window.URL.createObjectURL $scope.vmdName if $scope.vmdName instanceof File
 
     filename= $scope.vmdName?.name ? $scope.vmdName
-    if filename.slice(-4) is '.vmd'
-      loader= new Loaders.Loader $scope.pmxName,motion
+    isBase64= filename.slice(0,4) is 'b64:'
+    isVpd= filename.slice(-4) is '.vpd'
+
+    if isBase64
+      loader= new Loaders.Base64Loader $scope.pmxName,url
+
     else
-      loader= new Loaders.VpdLoader $scope.pmxName,motion
+      unless isVpd
+        loader= new Loaders.Loader $scope.pmxName,url
+
+      else
+        loader= new Loaders.VpdLoader $scope.pmxName,url
+        loader.base64= $scope.vmdName instanceof File
 
     flush
     .then ->
       loader.model
 
-    .then ({mesh,morph,skin,ik,physi,physiPlugin,addTrans})->
-      $window.URL.revokeObjectURL motion if motion.slice(0,5) is 'blob:'
+    .then ({mesh,morph,skin,ik,physi,physiPlugin,addTrans,base64})->
+      $window.URL.revokeObjectURL url if url.slice(0,5) is 'blob:'
 
-      resize()
-      morph?.play $scope.loop
-      skin?.play $scope.loop
+      if base64
+        $scope.vmdName= base64
+        return
 
-      requestAnimationFrame ->
-        scene.add mesh
-        renderer.renderPluginsPre.length= 0
-        renderer.renderPluginsPre.unshift physiPlugin if $scope.physics && $scope.physics isnt 'false'
+      $timeout ->
+        resize()
+        morph?.play $scope.loop
+        skin?.play $scope.loop
 
-        render()
+        requestAnimationFrame ->
+          scene.add mesh
+          renderer.renderPluginsPre.length= 0
+          renderer.renderPluginsPre.unshift physiPlugin if $scope.physics && $scope.physics isnt 'false'
 
-      render= ->
-        return unless loader.isFulfilled()
-        stats.begin()
+          render()
 
-        requestAnimationFrame render
+        render= ->
+          return unless loader.isFulfilled()
+          stats.begin()
 
-        loader.nextDelta()
-        if skin?.playing
-          for bone,i in mesh.geometry.bones
-            mesh.bones[i].position.set bone.pos[0], bone.pos[1], bone.pos[2]
-            mesh.bones[i].quaternion.set bone.rotq[0], bone.rotq[1], bone.rotq[2], bone.rotq[3]
+          requestAnimationFrame render
 
-          morph.update loader.delta if morph
-          skin.update loader.delta if skin
-          ik.update loader.delta if ik
-          addTrans.update loader.delta if addTrans
+          loader.nextDelta()
+          if skin?.playing
+            for bone,i in mesh.geometry.bones
+              mesh.bones[i].position.set bone.pos[0], bone.pos[1], bone.pos[2]
+              mesh.bones[i].quaternion.set bone.rotq[0], bone.rotq[1], bone.rotq[2], bone.rotq[3]
 
-        controls.update()
+            morph.update loader.delta if morph
+            skin.update loader.delta if skin
+            ik.update loader.delta if ik
+            addTrans.update loader.delta if addTrans
 
-        renderer.render scene,camera
+          controls.update()
 
-        stats.end()
+          renderer.render scene,camera
+
+          stats.end()

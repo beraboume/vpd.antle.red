@@ -1,5 +1,6 @@
 # Dependencies
-vpd= require 'vpvp-vpd'
+vpvpVpd= require 'vpvp-vpd'
+pako= require 'pako'
 
 # Publish
 app= angular.module process.env.APP
@@ -37,7 +38,7 @@ app.factory 'Loaders',($window,Promise,renderer)->
         xhr.responseType= 'arraybuffer'
         xhr.send()
         xhr.onload= ->
-          resolve vpd.parse new Buffer xhr.response
+          resolve vpvpVpd.parse new Buffer xhr.response
 
     generateSkinAnimation: (pmx,vpd)->
       duration= 0.03333333333333333
@@ -114,6 +115,8 @@ app.factory 'Loaders',($window,Promise,renderer)->
       .spread ({pmx,mesh},vpd)=>
         morph= null
 
+        base64= @deflate vpd if @base64
+
         sAnimation= @generateSkinAnimation pmx,vpd
         skin= new THREE.MMD.MMDSkin mesh, sAnimation if sAnimation
 
@@ -131,6 +134,29 @@ app.factory 'Loaders',($window,Promise,renderer)->
         hasAd= pmx.bones.some (bone)-> bone.additionalTransform
         addTrans= new THREE.MMD.MMDAddTrans pmx, mesh if hasAd
 
-        {mesh,morph,skin,ik,physi,physiPlugin,addTrans}
+        {mesh,morph,skin,ik,physi,physiPlugin,addTrans,base64}
 
-  {Loader,VpdLoader}
+    deflate: (vpd)->
+      data= (vpvpVpd.mangle vpd).join ','
+      'b64:'+(new Buffer (pako.deflate data,{to:'string'})).toString('base64')
+
+  class Base64Loader extends VpdLoader
+    constructor: (pmxName,base64)->
+      @clock= new THREE.Clock
+
+      @pmx= @loadPmx pmxName
+      @vpd= @loadVpd base64
+      @model= @createModel()
+
+    loadVpd: (base64)->
+      deflated= (new Buffer base64.slice(4),'base64').toString()
+      data= (pako.inflate deflated,{to:'string'}).split ','
+      bones= vpvpVpd.restore data
+
+      for bone in bones
+        bone.position[key]= parseFloat value for value,key in bone.position
+        bone.quaternion[key]= parseFloat value for value,key in bone.quaternion
+
+      Promise.resolve {bones}
+
+  {Loader,VpdLoader,Base64Loader}
