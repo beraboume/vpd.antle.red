@@ -7,7 +7,8 @@
     "bluebird": "^2.10.2",
     "difficult-http-server": "^0.0.8",
     "express": "^4.13.3",
-    "vpvp-vpd": "0.0.0-alpha"
+    "pako": "^0.2.8",
+    "vpvp-vpd": "0.0.0-beta"
   },
 
   "scripts": {

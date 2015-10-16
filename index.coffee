@@ -82,6 +82,7 @@ app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loader
       values[key]= $scope[key] for key in available
 
       $location.search values
+      $location.replace()
     ,100
     return
 
