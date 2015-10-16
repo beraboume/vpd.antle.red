@@ -3,6 +3,10 @@
 
 ![2015-10-16 02.18.43](https://cloud.githubusercontent.com/assets/1548478/10521810/aad3d9aa-73ac-11e5-83dc-3b5efe921949.png)
 
+## つかいかた
+
+`.vpd`ファイルを画面上にドラッグ＆ドロップしてください。ポーズが反映されます。
+
 # Setup & Boot
 
 gitおよびNodeJSとbowerのインストールが終了していることが前提です。ターミナル／cmder環境下で
