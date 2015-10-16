@@ -1,7 +1,7 @@
 [【ポーズ配布】 使い勝手悪いモノ](http://seiga.nicovideo.jp/seiga/im2019083)
 ---
 
-![【ポーズ配布】 使い勝手悪いモノ](http://lohas.nicoseiga.jp/priv/a97f0cbcaa5f3757a6242b441699fe8d46148698/1443934029/2019083)
+![【ポーズ配布】 使い勝手悪いモノ](http://lohas.nicoseiga.jp//thumb/2019083l?)
 
 >
 ロダの試用を兼ねたポーズ詰め合わせの配布、画像以外にもいくつか入っています
