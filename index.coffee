@@ -75,15 +75,14 @@ app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loader
   controls.center.setY 10
 
   # controlls
-  query= do $location.search
+  query= $location.search()
   $scope.$watch ->
-    autoSave= $timeout ->
+    $timeout ->
       values= {}
       values[key]= $scope[key] for key in available
 
       $location.search values
       $location.replace()
-    ,100
     return
 
   $scope.loop= query.loop ? no

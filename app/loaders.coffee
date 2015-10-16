@@ -40,6 +40,41 @@ app.factory 'Loaders',($window,Promise,renderer)->
         xhr.onload= ->
           resolve vpvpVpd.parse new Buffer xhr.response
 
+    generateBlinkAnimation: (pmx,vpd)->
+      # duration= 0.03333333333333333
+      targets= []
+
+      keys= []
+
+      i= 0
+
+      keys.push
+        name: 'まばたき'
+        time: 0
+        weight: 0.00
+
+      keys.push
+        name: 'まばたき'
+        time: 3.0
+        weight: 0.00
+
+      keys.push
+        name: 'まばたき'
+        time: 3.05
+        weight: 1.00
+
+      keys.push
+        name: 'まばたき'
+        time: 3.10
+        weight: 0.00
+
+      targets.push {keys}
+
+      finalTarget= targets[targets.length-1]
+      maxTime= finalTarget.keys[finalTarget.keys.length-1].time
+
+      {duration:maxTime,targets}
+
     generateSkinAnimation: (pmx,vpd)->
       duration= 0.03333333333333333
       targets= []
@@ -113,7 +148,8 @@ app.factory 'Loaders',($window,Promise,renderer)->
     createModel: ->
       Promise.all [@pmx,@vpd]
       .spread ({pmx,mesh},vpd)=>
-        morph= null
+        mAnimation= @generateBlinkAnimation pmx,vpd
+        morph= new THREE.MMD.MMDMorph mesh, mAnimation if mAnimation
 
         base64= @deflate vpd if @base64
 
