@@ -85,7 +85,8 @@ app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loader
       $location.replace()
     return
 
-  $scope.loop= query.loop ? no
+  $scope.loop= yes
+  $scope.loop= no if query.loop is 'false'
   $scope.physics= query.physics ? yes
   $scope.reset= ->
     $window.location.href= '/'
