@@ -65,7 +65,7 @@ app.factory 'Loaders',($window,Promise,renderer)->
 
       keys.push
         name: 'まばたき'
-        time: 3.10
+        time: 3.20
         weight: 0.00
 
       targets.push {keys}
