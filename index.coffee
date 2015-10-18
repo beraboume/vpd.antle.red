@@ -59,7 +59,7 @@ app.config ($stateProvider)->
 app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loaders)->
   scene= new THREE.Scene
 
-  dLight= new THREE.DirectionalLight 0xffffff,0.9
+  dLight= new THREE.DirectionalLight 0xffffff,1
   dLight.position.set 0, 7, 10
   scene.add dLight
   $scope.dLight= dLight
