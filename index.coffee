@@ -12,6 +12,7 @@ models= [
   'models/tda_miku_apend/index.pmx'
   'models/mamama_miku/index.pmx'
   'models/grpk_miku/index.pmx'
+  'models/tumi_miku/index.pmx'
 ]
 
 motionDefault= 'poses/kakyoin.vpd'
@@ -59,7 +60,7 @@ app.config ($stateProvider)->
 app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loaders)->
   scene= new THREE.Scene
 
-  dLight= new THREE.DirectionalLight 0xffffff,1
+  dLight= new THREE.DirectionalLight 0xffffff,0.9
   dLight.position.set 0, 7, 10
   scene.add dLight
   $scope.dLight= dLight
