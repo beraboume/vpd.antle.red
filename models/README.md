@@ -157,3 +157,32 @@ Tda【http://u16hp.blog134.fc2.com/】
 
 データ制作 ：ゴロペコ
 ```
+
+## `tumi_miku/index.pmx`
+
+[つみ式ミク](http://www.nicovideo.jp/watch/sm27427927)
+
+![](http://lohas.nicoseiga.jp//thumb/5303246i?)
+
+```
+　You are allowed to use this MMD model only if you follow the guideline
+　set by Crypton Future Media, INC. for the usage of its characters.
+　For detail, see: http://piapro.net/en_for_creators.html
+
+※使用上の注意
+
+・このモデルはMikuMikuDance用のモデルデータです。
+　基本的にはMikuMikuDance内でご利用下さい。
+・このモデルはクリプトン・フューチャー・メディア株式会社のキャラクター「初音ミク」の二次創作です。
+　関係者様に迷惑がかかるようなことがあれば配布を停止させて頂きます。
+・モデルについての問い合わせはモデル製作者までご連絡ください。
+・このモデルの個人サイト・動画サイトなどでの使用は自由ですが、商用利用・再配布は禁止させて頂きます。
+　改造などは自由ですが改造モデルの配布などの際は事前にお話をお聞かせください。
+・このモデルを使用して発生したいかなる損害・損失・トラブル・その他の不利益に対して当方は責任を持てません。
+　自己責任の元、ご使用ください。
+・版権元やその他の関係者に迷惑をかけたり気分を害するような使用や、政治的目的・誹謗中傷目的などでの使用などは厳禁です。
+　PLCに則り、場を弁えたご利用をお願いします。
+・この利用規約は予告なく変更される場合があることをご了承ください。
+
+モデル製作：つみだんご
+```
