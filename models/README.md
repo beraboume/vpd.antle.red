@@ -207,6 +207,4 @@ Terms of Use:
 **This model may not be knowingly used in any derrogatory manner.
 **This model may not be redistributed under any circumstances.
 **Digitrevx is not responsible for any harm or effects this data has on the users property.
-
-Features
 ```
