@@ -186,3 +186,25 @@ Tda【http://u16hp.blog134.fc2.com/】
 
 モデル製作：つみだんご
 ```
+
+## `racing_miku/index.pmx`
+
+[Princess Knight Racing Miku 2015 MMD by Digitrevx on DeviantArt](http://digitrevx.deviantart.com/art/Princess-Knight-Racing-Miku-2015-MMD-530215264)
+
+![](http://pre07.deviantart.net/77e3/th/pre/f/2015/120/4/e/princess_knight_racing_miku_2015_mmd_by_digitrevx-d8rocps.png)
+
+```
+Princess Knight Racing Miku 2015
+(c) GoodSmile Company / Crypton Future Media INC.
+Costume Design: ??????
+
+Modeler: Digitrevx
+http://digitrevx.deviantart.com
+
+Terms of Use:
+**This model is not permitted for Commercial use by any 3rd party.
+**Do not use this model in any mannor that may harm GoodSmile, Crypton or Digitrevx’s Image or Identity.
+**This model may not be knowingly used in any derrogatory manner.
+**This model may not be redistributed under any circumstances.
+**Digitrevx is not responsible for any harm or effects this data has on the users property.
+```
