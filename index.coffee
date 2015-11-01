@@ -13,6 +13,7 @@ models= [
   'models/mamama_miku/index.pmx'
   'models/grpk_miku/index.pmx'
   'models/tumi_miku/index.pmx'
+  'models/racing_miku/index.pmx'
 ]
 
 motionDefault= 'poses/kakyoin.vpd'
