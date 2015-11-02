@@ -4,8 +4,8 @@
 
   "main": "server.coffee",
   "dependencies": {
-    "bluebird": "^2.10.2",
-    "difficult-http-server": "^0.0.8",
+    "bluebird": "^3.0.5  │",
+    "difficult-http-server": "^0.0.12",
     "express": "^4.13.3",
     "pako": "^0.2.8",
     "vpvp-vpd": "0.0.0-beta"
