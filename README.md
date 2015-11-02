@@ -15,20 +15,12 @@ gitおよびNodeJSとbowerのインストールが終了していることが前
 git clone https://github.com/59naga/vpd.berabou.me.git
 cd vpd.berabou.me
 
-npm install
+npm run build
 npm start
 # Server running at http://localhost:59798
 ```
 
-とすることで、`http://localhost:59798`上に、開発環境を起動できます。
-
-```bash
-NODE_ENV=production npm start
-# Server running at http://localhost:59798
-```
-
-とすることで、本番環境に近い、コンパイルを圧縮して、各`index`ファイルを公開します。
-（初回起動時、ファイルの圧縮にCPUをかなり消費します。プロセスが強制終了して`pkgs.min.js`が生成されない場合は、`onefile -o pkgs.min.js -m`を手動で行う必要があるかもしれません。ファイルが`./pkgs.min.js`に存在する場合、圧縮処理は起動しません。）
+とすることで、`http://localhost:59798`上に、本番環境を起動します。
 
 License
 ---
