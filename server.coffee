@@ -1,6 +1,6 @@
 # Dependencies
 express= require 'express'
-dhs= require 'difficult-http-server'
+compression= require 'compression'
 
 # Environment
 process.env.PORT?= 59798
@@ -9,7 +9,9 @@ bundleExternal= yes
 
 # Setup express
 app= express()
-app.use dhs {cwd,bundleExternal}
+app.use compression()
+app.use express.static cwd+'/dist'
+app.use express.static cwd
 
 # Boot
 app.listen process.env.PORT,->

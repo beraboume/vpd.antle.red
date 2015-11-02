@@ -4,7 +4,7 @@ html(lang='ja')
     meta(charset='UTF-8')
     link(rel="shortcut icon" href="https://raw.githubusercontent.com/59naga/fixture-images/master/still.GIF" type="image/gif")
     link(href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css')
-    title vpd.berabou.me
+    title=process.env.npm_package_name
     //- script(src='bower_components/jquery/dist/jquery.js' title="Fix undefined window.$ at electron-prebuilt")
     script(src=process.env.NODE_ENV=='production'? 'pkgs.min.js': 'pkgs.js')
     link(href="index.css" rel="stylesheet")
