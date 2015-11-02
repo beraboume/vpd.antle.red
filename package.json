@@ -1,6 +1,7 @@
 {
   "name": "vpd.antle.red",
   "private": true,
+
   "main": "server.coffee",
   "scripts": {
     "postinstall": "bower install && npm run build",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "difficult-http-server": "^0.0.12"
   },
+  
   "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
   "license": "MIT",
   "repository": {
