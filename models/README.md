@@ -93,6 +93,30 @@ yhblat@excite.co.jp
 http://innoce.nobody.jp/
 ```
 
+## `lat_miku_theend/index.pmx`
+
+[Lat Miku The End by Swatmare](http://swatmare.deviantart.com/art/MMD-Lat-Miku-The-End-DOWNLOAD-447443107)
+
+![](https://s-media-cache-ak0.pinimg.com/564x/8a/13/1f/8a131f1ec3778dd225d523189df2b75d.jpg)
+
+```
+Original model by Lat
+
+Have Fun!!!!! :)
+
+:Rules:
+.Please credit me for the edit.
+.Please credit Lat for the original model.
+.Please do not claim the edit as your own.
+.Do not redistribute.
+.Do not take the textures and parts. 
+.Do not edit the textures or switch them with other textures made by other people.
+.Do not edit.
+
+password: Das Ende
+with space
+```
+
 ## `tda_miku_apend/index.pmx`
 
 [Tda式初音ミク・アペンド](http://lohas.nicoseiga.jp/o/ceba9957511ccf00a71e53ece2537c67e002baa7/1444008814/2018614)

@@ -9,6 +9,7 @@ models= [
   'models/lat_miku/summer.pmx'
   'models/lat_miku/white.pmx'
   'models/lat_miku/winter.pmx'
+  'models/lat_miku_theend/index.pmx'
   'models/tda_miku_apend/index.pmx'
   'models/mamama_miku/index.pmx'
   'models/grpk_miku/index.pmx'
