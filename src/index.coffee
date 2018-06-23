@@ -92,7 +92,7 @@ app.controller 'viewer',($scope,$window,$location,$timeout,stats,renderer,Loader
   $scope.loop= no if query.loop is 'false'
   $scope.physics= query.physics ? yes
   $scope.reset= ->
-    $window.location.href= '/'
+    $window.location.href= './'
     return
   $scope.models= models
   $scope.pmxName= query.pmxName ? modelDefault
