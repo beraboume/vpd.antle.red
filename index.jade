@@ -1,0 +1,51 @@
+doctype html
+html(lang='ja')
+  head
+    meta(charset='UTF-8')
+    link(rel="shortcut icon" href="https://raw.githubusercontent.com/59naga/fixture-images/master/still.GIF" type="image/gif")
+    link(href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css')
+    title=process.env.npm_package_name
+    //- script(src='bower_components/jquery/dist/jquery.js' title="Fix undefined window.$ at electron-prebuilt")
+    script(src=process.env.NODE_ENV=='production'? 'pkgs.min.js': 'pkgs.js')
+    link(href="index.css" rel="stylesheet")
+    script(src="index.js")
+
+  body
+    h1=process.env.npm_package_name
+
+    footer
+      a(href="https://github.com/59naga/vpd.berabou.me") fork on me githubｯｯｯ!!
+
+    main(ui-view ng-model="files" ngf-drop)
+      form#debug
+        section
+          div.divide
+            h2 loop
+            input(ng-model="loop" type="checkbox")
+            h2 physics
+            input(ng-model="physics" type="checkbox")
+
+            button(ng-click="reset()") reset
+          h2 models
+          select(ng-model='pmxName' ng-options="model for model in models")
+          h2 poses / motions
+          select(ng-model='vmdName' ng-options="motion.name || motion for motion in motions")
+            
+        section
+          h2 controlls
+
+          label
+            h3 zoom({{zoom}})
+            input(ng-model="zoom" type="range" step="0.1" min="0.1" max="5")
+          label
+            h3 yaw({{yaw}})
+            input(ng-model="yaw" type="range" step="10" min="-180" max="180")
+          label
+            h3 pitch({{pitch}})
+            input(ng-model="pitch" type="range" step="10" min="-180" max="180")
+         label
+            h3 scroll({{scroll}})
+            input(ng-model="scroll" type="range" step="1" min="-50" max="50")
+         label
+            h3 slide({{slide}})
+            input(ng-model="slide" type="range" step="1" min="-50" max="50")

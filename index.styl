@@ -1,0 +1,95 @@
+meyer-reset()
+
+// style for electron-prebuilt
+// html,body
+//   background none
+// body
+//   -webkit-app-region no-drag
+// #stats
+//   -webkit-user-select none
+//   -webkit-app-region drag
+// #debug
+//   display none
+
+html,body
+  height 100%
+
+body
+  color #89646C//rgba(105,12,12,0.5)
+  background-color #abc
+
+body
+  position relative
+  h1
+    font-family 'Lobster',cursive
+    font-size 15vw
+    absolute 0 0 0 0
+    margin auto
+    height 1em
+    width 100%
+    z-index 1
+    text-align center
+main
+  fixed 0 0 0 0
+  z-index 5
+
+footer
+#debug
+  font-family 'Monaco',monospace
+  text-shadow:
+   -1px -1px 0 #ddd,
+    1px -1px 0 #ddd,
+    -1px 1px 0 #ddd,
+     1px 1px 0 #ddd;
+  
+  width 40vw
+
+footer
+  fixed false false 0 0
+  z-index 10
+  padding .25em
+  
+  a
+    color inherit
+    font-size small
+
+#debug
+  fixed false 0 0 false
+  
+  color #333
+  background-color transparent
+  
+  .divide
+    display flex
+    > h2
+      flex 1
+    > input
+      flex .5
+    > button
+      margin-right .5em
+  
+  h2
+    font-size large
+    font-weight bold
+  h3
+    font-size x-small
+  label
+    display flex
+    >*
+      flex 1
+      
+    margin .25em 0
+      
+    >input
+      -webkit-appearance none
+      height 1px
+      margin .4em .25em
+      
+      &::-webkit-slider-thumb
+        -webkit-appearance none
+        border none
+        height 8px
+        width 8px
+        // border-radius 50%
+        background black
+        margin .25em 0
