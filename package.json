@@ -7,10 +7,9 @@
     "postinstall": "bower install && npm run build",
     "build": "NODE_ENV=production npm-run-all --parallel build:*",
     "build:bower": "onefile -o dist/pkgs.min.js -m",
-    "build:coffee": "browserify index.coffee --extension .coffee -t coffeeify -t [browserify-ngannotate --ext .coffee] | uglifyjs -cm > dist/index.js",
-    "build:jade": "jade index.jade --out dist",
-    "build:stylus": "stylus --use kouto-swiss --import kouto-swiss --compress index.styl --out dist",
-    "start": "coffee server.coffee"
+    "build:coffee": "browserify src/index.coffee --extension .coffee -t coffeeify -t [browserify-ngannotate --ext .coffee] | uglifyjs -cm > dist/index.js",
+    "build:jade": "jade src/index.jade --out dist",
+    "build:stylus": "stylus --use kouto-swiss --import kouto-swiss --compress src/index.styl --out dist"
   },
   "dependencies": {
     "bluebird": "^2.10.2",
@@ -27,9 +26,6 @@
     "stylus": "^0.52.4",
     "uglifyjs": "^2.4.10",
     "vpvp-vpd": "0.0.0-beta"
-  },
-  "devDependencies": {
-    "difficult-http-server": "^0.0.12"
   },
   
   "author": "59naga <i59naga@icloud.com> (http://berabou.me)",

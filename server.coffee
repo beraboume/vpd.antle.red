@@ -11,7 +11,6 @@ bundleExternal= yes
 app= express()
 app.use compression()
 app.use express.static cwd+'/dist'
-app.use express.static cwd
 
 # Boot
 app.listen process.env.PORT,->
